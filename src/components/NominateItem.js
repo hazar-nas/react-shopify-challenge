@@ -14,7 +14,11 @@ const NominateItem = ({ item }) => {
 
   return (
     <div className='flex px-10 pb-2 mr-5 mb-4 border-solid border-2 border-green-100'>
-      <img className='w-24 h-32 rounded-md z-10 -mt-2' src={item.Poster} />
+      <img
+        alt='posterr.png'
+        className='w-24 h-32 rounded-md z-10 -mt-2'
+        src={item.Poster}
+      />
       <div className='pl-8 pt-2 flex flex-col '>
         <h3 className='text-gray-100 font-semibold'>{item.Title}</h3>
         <div className='flex items-center mt-2'>

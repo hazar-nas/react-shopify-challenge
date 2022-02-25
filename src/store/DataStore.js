@@ -22,7 +22,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedItems: state.selectedItems.filter(
-          (item) => item.Title != action.payload
+          (item) => item.Title !== action.payload
         ),
       }
     case 'ADD_ITEM':

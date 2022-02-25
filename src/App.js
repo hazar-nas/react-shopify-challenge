@@ -1,12 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import HomePage from './components/HomePage'
-import { DataContext, DataStore } from './store/DataStore'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from 'react-router-dom'
+import { DataContext } from './store/DataStore'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import WinnerPage from './components/WinnerPage'
 import Footer from './components/Footer'
 
