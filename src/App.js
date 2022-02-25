@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect } from 'react'
+import HomePage from './components/HomePage'
+import { DataContext, DataStore } from './store/DataStore'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from 'react-router-dom'
+import WinnerPage from './components/WinnerPage'
+import Footer from './components/Footer'
 
 function App() {
+  const {
+    state: { selectedItems },
+  } = useContext(DataContext)
+
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    selectedItems.length < 5 && navigate('/')
+  }, [selectedItems.length, navigate])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/winner' element={<WinnerPage />} />
+      </Routes>
+      <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
