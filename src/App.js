@@ -22,7 +22,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/winner' element={<WinnerPage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
