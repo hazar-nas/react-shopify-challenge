@@ -14,7 +14,7 @@ const Search = () => {
     e.preventDefault()
     dispatch({ type: 'RESET_RESULTS' })
     let res = await fetch(
-      `http://www.omdbapi.com/?s=${formatQuery}&type=${searchType}&apikey=b8767efb`
+      `https://www.omdbapi.com/?s=${formatQuery}&type=${searchType}&apikey=b8767efb`
     )
     let fetchData = await res.json()
     // console.log(fetchData.Response)
