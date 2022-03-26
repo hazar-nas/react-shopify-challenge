@@ -17,8 +17,7 @@ const Search = () => {
       `https://www.omdbapi.com/?s=${formatQuery}&type=${searchType}&apikey=b8767efb`
     )
     let fetchData = await res.json()
-    // console.log(fetchData.Response)
-    // console.log(typeof fetchData.Response)
+
     if (fetchData.Response !== 'True') {
       dispatch({ type: 'SET_ERROR_RESULTS', payload: fetchData.Error })
       setSearchTerm('')
