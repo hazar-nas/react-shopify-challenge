@@ -6,7 +6,7 @@ const Results = ({ data }) => {
   // console.log(data.imdbID)
 
   const addNominatedItems = (data) => {
-    fetch(`http://www.omdbapi.com/?i=${data.imdbID}&page=13&apikey=b8767efb`)
+    fetch(`https://www.omdbapi.com/?i=${data.imdbID}&page=13&apikey=b8767efb`)
       .then((res) => res.json())
       .then((fetchData) => {
         if (state.selectedItems.length < 5) {
