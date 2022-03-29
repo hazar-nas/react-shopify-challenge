@@ -6,6 +6,8 @@ const Results = ({ data }) => {
   // console.log(data.imdbID)
 
   const addNominatedItems = (data) => {
+    // loader for selected items here
+    dispatch({ type: 'ADD_ITEM_PENDING' })
     fetch(`https://www.omdbapi.com/?i=${data.imdbID}&page=13&apikey=b8767efb`)
       .then((res) => res.json())
       .then((fetchData) => {

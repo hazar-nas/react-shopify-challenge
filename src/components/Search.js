@@ -3,6 +3,7 @@ import { DataContext } from '../store/DataStore'
 import { FaShopify } from 'react-icons/fa'
 import Results from './Results'
 import EndSelection from './EndSelection'
+import { BeatLoader } from 'react-spinners'
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -10,20 +11,22 @@ const Search = () => {
   const { state, dispatch } = useContext(DataContext)
 
   let formatQuery = searchTerm.replaceAll(' ', '+').toLowerCase()
-  const getData = async (e) => {
+  const getData = (e) => {
     e.preventDefault()
     dispatch({ type: 'RESET_RESULTS' })
-    let res = await fetch(
+    dispatch({ type: 'SET_PENDING_RESULTS' })
+    fetch(
       `https://www.omdbapi.com/?s=${formatQuery}&type=${searchType}&apikey=b8767efb`
     )
-    let fetchData = await res.json()
-
-    if (fetchData.Response !== 'True') {
-      dispatch({ type: 'SET_ERROR_RESULTS', payload: fetchData.Error })
-      setSearchTerm('')
-    }
-    dispatch({ type: 'SET_SEARCH_RESULTS', payload: fetchData.Search })
-    setSearchTerm('')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.Response === 'False') {
+          dispatch({ type: 'SET_ERROR_RESULTS', payload: data.Error })
+          setSearchTerm('')
+        }
+        dispatch({ type: 'SET_SEARCH_RESULTS', payload: data.Search })
+        setSearchTerm('')
+      })
   }
 
   const handleSearchType = (e) => {
@@ -51,7 +54,6 @@ const Search = () => {
       <p className=' pl-3 text-gray-500 text-md w-1/2 lg:text-2xl lg:pl-0  lg:w-full lg:mb-6'>
         Search below to nominate your top 5 favorite movies & series.
       </p>
-
       <div className='flex items-center h-16 w-full'>
         <div>
           <select
@@ -78,12 +80,17 @@ const Search = () => {
           </button>
         </form>
       </div>
+
+      {state.isLoading && (
+        <div className='text-center'>
+          <BeatLoader color='#26580F' />
+        </div>
+      )}
       {state.error && (
         <div className='bg-red-300 p-2 w-full text-md text-red-700'>
           {state.error}
         </div>
       )}
-
       {state.data &&
         (state.selectedItems && state?.selectedItems?.length >= 5 ? (
           <EndSelection />
