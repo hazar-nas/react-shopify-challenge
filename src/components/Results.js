@@ -18,6 +18,7 @@ const Results = ({ data }) => {
   }
 
   // console.log(state.selectedItems)
+  // DISABLE THE BUTTON WHEN DATA FETCHING FUNC. IS CALLED
 
   return (
     <div className='grid grid-cols-2 px-2 md:px-2  w-full justify-between mr-auto items-center lg:px-0 mb-2  last:border-b-0 border-solid border-b-2 border-b-gray-300'>
